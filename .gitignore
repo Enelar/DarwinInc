@@ -70,3 +70,5 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 DarwinInc/build_darwininc_vc12x/*
+DarwinInc/data-ram/*
+DarwinInc/data/development.icf
