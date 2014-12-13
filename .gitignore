@@ -69,3 +69,4 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+DarwinInc/build_darwininc_vc12x/*
