@@ -1,11 +1,11 @@
 #include "s3e.h"
 #include "IwDebug.h"
-#include "utils\sprite.h"
+#include "scene\world.h"
 
 void app()
 {
-  texture test("img/world1.png");
-  CIwFVec2    image_position = CIwFVec2::g_Zero;
+  world test;
+  test.Init();
 
   // Loop forever, until the user or the OS performs some action to quit the app
   while (!s3eDeviceCheckQuitRequest())
@@ -14,11 +14,9 @@ void app()
     s3eKeyboardUpdate();
     s3ePointerUpdate();
 
+    test.Update((float)30 / 1000);
+    test.Render();
 
-    // Your rendering/app code goes here.
-    Iw2DDrawImage(test, image_position);
-
-    Iw2DSurfaceShow();
     // Sleep for 0ms to allow the OS to process events etc.
     s3eDeviceYield(0);
   }

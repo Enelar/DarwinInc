@@ -7,6 +7,7 @@
 
 struct sprite
 {
+  sprite(string);
   sprite(texture);
 
   vec Pos() const;
@@ -25,5 +26,5 @@ private:
 private:
   texture img;
   bool self_destructing = false;
-  mutable Iw2DSceneGraph::CSprite *_sprite;
+  mutable Iw2DSceneGraph::CSprite *_sprite = nullptr;
 };
