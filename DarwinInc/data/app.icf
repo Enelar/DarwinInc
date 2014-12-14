@@ -22,3 +22,6 @@ DispFixRot = Landscape
 
 [GL]
 AllowNoDepthBufferClear = 1
+
+[UTIL]
+#MemoryBreakpoint=141

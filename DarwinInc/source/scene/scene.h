@@ -4,7 +4,7 @@
 //using namespace Iw2DSceneGraphCore;
 //using namespace Iw2DSceneGraph;
 
-#include "c++\list"
+#include "c++\stl\_list.h"
 #include "scene_object.h"
 
 

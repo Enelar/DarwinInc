@@ -48,7 +48,7 @@ struct scene_object : interface_scene_object // only interface resolution
   ~scene_object() override;
   interface_scene_object &get_pluggable();
 private:
-  scene_object_shared_pluggable *pluggable = new scene_object_shared_pluggable();
+  scene_object_shared_pluggable *pluggable = nullptr;
 };
 
 struct memleak_scene_object : scene_object

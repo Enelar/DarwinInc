@@ -15,11 +15,13 @@ struct shared
   {
     users++;
   }
-  void Remove()
+  bool Remove()
   {
     users--;
-    if (!users)
-      delete this;
+    if (users)
+      return false;
+    delete this;
+    return true;
   }
   T *data = nullptr;
 private:

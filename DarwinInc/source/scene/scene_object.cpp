@@ -36,8 +36,13 @@ scene_object_shared_pluggable::scene_object_shared_pluggable()
 void scene_object_shared_pluggable::HostRemove()
 {
   detached_storage->data->Remove();
-  detached_storage->Remove();
+  if (!detached_storage->Remove())
+    return;
+  // Host was last user, we should remove pluggable with our hands
+  detached_storage = nullptr;
+  delete this;
 }
+
 void scene_object_shared_pluggable::ClientRemove()
 {
   detached_storage->Remove();
@@ -57,11 +62,14 @@ void scene_object_shared_pluggable::Draw() const
 
 scene_object::~scene_object()
 {
-  pluggable->HostRemove();
+  if (pluggable)
+    pluggable->HostRemove();
 }
 
 interface_scene_object &scene_object::get_pluggable()
 {
+  if (!pluggable)
+    pluggable = new scene_object_shared_pluggable();
   if (!pluggable->detached_storage->data)
   {
     pluggable->detached_storage->data = new scene_object_reference(*this);
