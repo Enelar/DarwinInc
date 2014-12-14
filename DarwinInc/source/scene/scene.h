@@ -11,14 +11,14 @@
 using std::list;
 struct scene : scene_object //: public CNode
 {
-  list<scene_object *> objects;
+  list<interface_scene_object *> objects;
 
 public:
   void Update(float dtime) override;
   void Draw() const override;
 
-  scene &operator+=(scene_object);
-  scene &operator+=(shared_scene_obj);
+  scene &operator+=(interface_scene_object *);
+  scene &operator+=(scene_object &);
 
   ~scene() override;
 };

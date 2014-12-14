@@ -11,11 +11,18 @@ struct sprite : scene_object
   sprite(string);
   sprite(texture);
 
-  vec &Pos();
-  vec &Size();
-  float &Rot();
+  auto Pos() -> vec&;
+  auto Size() -> vec&;
+  auto Rot() -> float&;
+
+  auto Pos() const -> vec;
+  auto Size() const -> vec;
+  auto Rot() const -> float;
+
 private:
   texture img;
+  vec pos, size;
+  float rot;
 
   void Update(float dtime) override;
   void Draw() const override;

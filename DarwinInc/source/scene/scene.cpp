@@ -12,16 +12,15 @@ void scene::Draw() const
     obj->Draw();
 }
 
-scene &scene::operator+=(scene_object obj)
+scene &scene::operator+=(interface_scene_object *obj)
 {
-  objects.push_back(new memleak_scene_object(obj));
+  objects.push_back(obj);
   return *this;
 }
 
-scene &scene::operator+=(shared_scene_obj obj)
+scene &scene::operator+=(scene_object &obj)
 {
-  objects.push_back(&obj.object());
-  return *this;
+  return *this += &obj.get_pluggable();
 }
 
 scene::~scene()

@@ -1,22 +1,22 @@
 #pragma once
 #include "../def.h"
 
-struct scene_object
+struct interface_scene_object
 {
   virtual void Update(float dtime)
   {}
   virtual void Draw() const
   {}
-  virtual ~scene_object()
+  virtual ~interface_scene_object()
   {}
 };
 
-struct shared_scene_obj_plug : scene_object
+struct scene_object_reference : interface_scene_object
 {
   bool removed = false;
-  scene_object &obj;
+  interface_scene_object &obj;
 
-  shared_scene_obj_plug(scene_object &_obj)
+  scene_object_reference(interface_scene_object &_obj)
     : obj(_obj)
   {
 
@@ -24,6 +24,8 @@ struct shared_scene_obj_plug : scene_object
 
   void Update(float dtime) override
   {
+    if (this == nullptr)
+      return;
     if (removed)
       return;
     obj.Update(dtime);
@@ -31,6 +33,8 @@ struct shared_scene_obj_plug : scene_object
 
   void Draw() const override
   {
+    if (this == nullptr)
+      return;
     if (removed)
       return;
     obj.Draw();
@@ -44,32 +48,53 @@ struct shared_scene_obj_plug : scene_object
   }
 };
 
-struct shared_scene_obj : scene_object // interface resolution
+struct scene_object_shared_pluggable : interface_scene_object
 {
-  shared<shared_scene_obj_plug> *removed;
-  shared_scene_obj()
-    : removed(new shared<shared_scene_obj_plug>())
+  shared<scene_object_reference> *detached_storage = new shared<scene_object_reference>();;
+  scene_object_shared_pluggable()
+  {}
+  void HostRemove()
   {
-
+    detached_storage->data->Remove();
+    detached_storage->Remove();
+  }
+  void ClientRemove()
+  {
+    detached_storage->Remove();
+  }
+  ~scene_object_shared_pluggable()
+  {
+    ClientRemove();
+  }
+  void Update(float dtime) override
+  {
+    detached_storage->data->Update(dtime);
   }
 
-  ~shared_scene_obj() override
+  void Draw() const override
   {
-    removed->data->Remove();
-    removed->Remove();
+    detached_storage->data->Draw();
+  }
+};
+
+struct scene_object : interface_scene_object // interface resolution
+{
+  ~scene_object() override
+  {
+    pluggable->HostRemove();
   }
 
-  scene_object &object()
+  interface_scene_object &get_pluggable()
   {
-    return *reinterpret_cast<scene_object *>(this + 1);
+    if (!pluggable->detached_storage->data)
+    {
+      pluggable->detached_storage->data = new scene_object_reference(*this);
+      pluggable->detached_storage->Add();
+    }
+    return *pluggable;
   }
-
-  operator scene_object &()
-  {
-    if (!removed->data)
-      removed->data = new shared_scene_obj_plug(object());
-    return *removed->data;
-  }
+private:
+  scene_object_shared_pluggable *pluggable = new scene_object_shared_pluggable();
 };
 
 struct memleak_scene_object : scene_object
