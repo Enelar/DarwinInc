@@ -9,7 +9,7 @@
 
 
 using std::list;
-struct scene : scene_object //: public CNode
+struct scene : interface_scene_object //: public CNode
 {
   list<interface_scene_object *> objects;
 
