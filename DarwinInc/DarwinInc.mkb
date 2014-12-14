@@ -19,6 +19,8 @@ files
     scene.cpp
     scene_object.h
     scene_object.cpp
+    tree_of_objects.h
+    tree_of_objects.cpp
     world.h
     world.cpp
 }

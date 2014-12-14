@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _BASE_SCENE_OBJECT
+#define _BASE_SCENE_OBJECT
+
 #include "../def.h"
 
 struct interface_scene_object
@@ -43,7 +45,14 @@ struct scene_object_shared_pluggable : interface_scene_object
   void Draw() override;
 };
 
-struct scene_object : interface_scene_object // only interface resolution
+#endif
+
+#include "tree_of_objects.h"
+
+#ifdef _TREE_OBJECTS_DEFINED_
+#ifndef _SCENE_OBJECT_DEFINED_
+#define _SCENE_OBJECT_DEFINED_
+struct scene_object : tree_of_objects
 {
   ~scene_object() override;
   interface_scene_object &get_pluggable();
@@ -72,3 +81,5 @@ struct memleak_scene_object : scene_object
     obj.Draw();
   }
 };
+#endif
+#endif

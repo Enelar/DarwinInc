@@ -9,9 +9,9 @@
 
 
 using std::list;
-struct scene : interface_scene_object //: public CNode
+struct scene : interface_scene_object
 {
-  list<interface_scene_object *> objects;
+  tree_of_objects tree;
 
 public:
   void Update(float dtime) override;

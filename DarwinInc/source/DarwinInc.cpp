@@ -17,6 +17,8 @@ void app()
     test.Update((float)30 / 1000);
     test.Draw();
 
+    Iw2DSurfaceShow();
+
     // Sleep for 0ms to allow the OS to process events etc.
     s3eDeviceYield(0);
   }

@@ -30,8 +30,8 @@ void sprite::Draw()
 {
   if (Size() == vec(0, 0))
     Size() = vec(img->GetWidth(), img->GetHeight());
-  //Iw2DDrawImage(img, Pos());
-  Iw2DDrawImageRegion(img, Pos(), vec(0, 0), Size());
+
+ // Iw2DDrawImageRegion(img, Pos(), vec(0, 0), Size());
 }
 
 auto sprite::Pos()->vec&
