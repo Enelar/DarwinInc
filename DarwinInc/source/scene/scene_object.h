@@ -12,7 +12,7 @@ struct scene_object
 };
 
 template<typename T>
-struct shared_scene_obj_plug
+struct shared_scene_obj_plug : scene_object
 {
   bool removed = false;
   T &obj;
@@ -65,5 +65,12 @@ struct shared_scene_obj
   {
     assert(!removed);
     return *reinterpret_cast<T *>(this + 1);
+  }
+
+  operator scene_object &()
+  {
+    if (!removed->data)
+      removed->data = new shared_scene_obj_plug<T>(object());
+    return *removed->data;
   }
 };
