@@ -24,6 +24,16 @@ files
     tree_of_objects.cpp
     world.h
     world.cpp
+    window.h
+    window.cpp
+    [source/game/objects]
+    (source/gameobjects)
+    sceneswitch.h
+    sceneswitch.cpp
+    [source/game/calc]
+    (source/gameobjects)
+    map.h
+    map.cpp
 }
 
 subprojects

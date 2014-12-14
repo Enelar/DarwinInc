@@ -2,11 +2,14 @@
 #include "IwDebug.h"
 #include "scene\world.h"
 
+#define FPS 20
+
 void app()
 {
   world test;
   test.Init();
 
+  uint64 oldtime = 0, newtime = s3eTimerGetMs();
   // Loop forever, until the user or the OS performs some action to quit the app
   while (!s3eDeviceCheckQuitRequest())
   {
@@ -14,16 +17,24 @@ void app()
     s3eKeyboardUpdate();
     s3ePointerUpdate();
 
-    test.Update((float)30 / 1000);
+    Iw2DSurfaceClear(0xff000000);
+    test.Update((float)20 / 1000);
     test.Draw();
 
     Iw2DSurfaceShow();
 
-    // Sleep for 0ms to allow the OS to process events etc.
-    s3eDeviceYield(0);
+    int yield = 1000 / FPS - (newtime - oldtime);
+    // wished time - actual time
+    // if actual less, then we making to many fps, and could wait
+    // Otherwise we should render!
+    if (yield < 0)
+      yield = 0;
+    s3eDeviceYield(yield);
+
+    
+    oldtime = s3eTimerGetMs();
   }
 }
-
 
 // Main entry point for the application
 int main()

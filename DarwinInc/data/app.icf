@@ -18,7 +18,7 @@
 
 [S3E]
 MemSize = 30000000
-DispFixRot = Landscape
+DispFixRot = FixedLandscape
 
 [GL]
 AllowNoDepthBufferClear = 1
