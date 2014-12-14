@@ -5,7 +5,7 @@ struct interface_scene_object
 {
   virtual void Update(float dtime)
   {}
-  virtual void Draw() const
+  virtual void Draw()
   {}
   virtual ~interface_scene_object()
   {}
@@ -23,7 +23,7 @@ struct scene_object_reference : interface_scene_object
   scene_object_reference(interface_scene_object &_obj);
 
   void Update(float dtime) override;
-  void Draw() const override;
+  void Draw() override;
 
   void Remove();
 };
@@ -40,7 +40,7 @@ struct scene_object_shared_pluggable : interface_scene_object
   
   ~scene_object_shared_pluggable() override;
   void Update(float dtime) override;
-  void Draw() const override;
+  void Draw() override;
 };
 
 struct scene_object : interface_scene_object // only interface resolution
@@ -67,7 +67,7 @@ struct memleak_scene_object : scene_object
     obj.Update(dtime);
   }
 
-  void Draw() const override
+  void Draw() override
   {
     obj.Draw();
   }

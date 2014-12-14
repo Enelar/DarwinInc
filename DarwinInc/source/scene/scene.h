@@ -15,7 +15,7 @@ struct scene : interface_scene_object //: public CNode
 
 public:
   void Update(float dtime) override;
-  void Draw() const override;
+  void Draw() override;
 
   scene &operator+=(interface_scene_object *);
   scene &operator+=(scene_object &);

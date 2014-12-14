@@ -2,7 +2,7 @@
 
 void world::Init()
 {
-  sprite t("img/world1.png");
-  *this += t;
+  map = "img/world1.png";
+  *this += map;
 //  AddChild(t);
 }

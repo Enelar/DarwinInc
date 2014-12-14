@@ -11,13 +11,25 @@ sprite::sprite(texture tex)
 {
 }
 
+sprite::sprite()
+{
+}
+
+sprite &sprite::operator=(string file)
+{
+  img = file;
+  return *this;
+}
+
 void sprite::Update(float dtime)
 {
 
 }
 
-void sprite::Draw() const
+void sprite::Draw()
 {
+  if (Size() == vec(0, 0))
+    Size() = vec(img->GetWidth(), img->GetHeight());
   Iw2DDrawImageRegion(img, Pos(), vec(0, 0), Size());
 }
 

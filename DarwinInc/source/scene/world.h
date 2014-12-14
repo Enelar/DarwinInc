@@ -3,5 +3,6 @@
 
 struct world : public scene
 {
+  sprite map;
   void Init();
 };

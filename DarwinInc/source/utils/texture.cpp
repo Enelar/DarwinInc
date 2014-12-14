@@ -6,6 +6,8 @@ texture::texture(string file)
 
 }
 
+texture::texture() {}
+
 texture::operator CIw2DImage*() const
 {
   if (img)
@@ -13,8 +15,19 @@ texture::operator CIw2DImage*() const
   return img = Iw2DCreateImage(filename.c_str());
 }
 
+CIw2DImage* texture::operator->() const
+{
+  return (CIw2DImage*)*this;
+}
+
 texture::~texture()
 {
   if (img)
     delete img;
+}
+
+void texture::operator=(string file)
+{
+  assert_msg(!img, "Is danger to change texture on fly, sorry");
+  filename = file;
 }

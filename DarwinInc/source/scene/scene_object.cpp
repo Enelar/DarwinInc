@@ -15,7 +15,7 @@ void scene_object_reference::Update(float dtime)
   obj.Update(dtime);
 }
 
-void scene_object_reference::Draw() const
+void scene_object_reference::Draw()
 {
   if (this == nullptr)
     return;
@@ -55,7 +55,7 @@ void scene_object_shared_pluggable::Update(float dtime)
 {
   detached_storage->data->Update(dtime);
 }
-void scene_object_shared_pluggable::Draw() const
+void scene_object_shared_pluggable::Draw()
 {
   detached_storage->data->Draw();
 }

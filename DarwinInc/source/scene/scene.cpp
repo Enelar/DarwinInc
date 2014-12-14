@@ -6,7 +6,7 @@ void scene::Update(float dtime)
     obj->Update(dtime);
 }
 
-void scene::Draw() const
+void scene::Draw()
 {
   for (auto &obj : objects)
     obj->Draw();

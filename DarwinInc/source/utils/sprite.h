@@ -10,6 +10,9 @@ struct sprite : scene_object
 {
   sprite(string);
   sprite(texture);
+  sprite();
+
+  sprite &operator=(string);
 
   auto Pos() -> vec&;
   auto Size() -> vec&;
@@ -21,9 +24,9 @@ struct sprite : scene_object
 
 private:
   texture img;
-  vec pos, size;
-  float rot;
+  vec pos = vec(0, 0), size = vec(0, 0);
+  float rot = 0;
 
   void Update(float dtime) override;
-  void Draw() const override;
+  void Draw() override;
 };
