@@ -17,6 +17,7 @@ files
     (source/scene)
     scene.h
     scene.cpp
+    scene_object.h
     world.h
     world.cpp
 }
