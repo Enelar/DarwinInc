@@ -13,19 +13,12 @@ struct sprite : scene_object
   sprite();
 
   sprite &operator=(string);
-
-  auto Pos() -> vec&;
   auto Size() -> vec&;
-  auto Rot() -> float&;
-
-  auto Pos() const -> vec;
   auto Size() const -> vec;
-  auto Rot() const -> float;
 
 private:
   texture img;
-  vec pos = vec(0, 0), size = vec(0, 0);
-  float rot = 0;
+  vec wished_size;
 
   void Update(float dtime) override;
   void Draw() override;

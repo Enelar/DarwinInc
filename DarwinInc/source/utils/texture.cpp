@@ -31,3 +31,8 @@ void texture::operator=(string file)
   assert_msg(!img, "Is danger to change texture on fly, sorry");
   filename = file;
 }
+
+vec texture::Size() const
+{
+  return{ (*this)->GetWidth(), (*this)->GetHeight() };
+}

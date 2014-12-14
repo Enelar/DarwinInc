@@ -23,39 +23,27 @@ sprite &sprite::operator=(string file)
 
 void sprite::Update(float dtime)
 {
+  if (Size() == vec(0, 0))
+    Size() = img.Size();
 
+  matrix_object::Size() = vec(wished_size[0] / img.Size()[0], wished_size[1] / img.Size()[1]);
+  scene_object::Update(dtime);
 }
 
 void sprite::Draw()
 {
-  if (Size() == vec(0, 0))
-    Size() = vec(img->GetWidth(), img->GetHeight());
+  scene_object::Draw();
 
+  Iw2DDrawImage(img, vec(0, 0));
  // Iw2DDrawImageRegion(img, Pos(), vec(0, 0), Size());
 }
 
-auto sprite::Pos()->vec&
+auto sprite::Size() -> vec &
 {
-  return pos;
-}
-auto sprite::Size()->vec&
-{
-  return size;
-}
-auto sprite::Rot() -> float&
-{
-  return rot;
+  return wished_size;
 }
 
-auto sprite::Pos() const -> vec
-{
-  return pos;
-}
 auto sprite::Size() const -> vec
 {
-  return size;
-}
-auto sprite::Rot()  const -> float
-{
-  return rot;
+  return wished_size;
 }

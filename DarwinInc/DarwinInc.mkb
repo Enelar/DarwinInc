@@ -20,6 +20,7 @@ files
     scene_object.h
     scene_object.cpp
     tree_of_objects.h
+    matrix_object.cpp
     tree_of_objects.cpp
     world.h
     world.cpp

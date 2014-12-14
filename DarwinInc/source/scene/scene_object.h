@@ -14,6 +14,7 @@ struct interface_scene_object
 };
 
 #include "IwGeom.h"
+#include "../utils/vec.h"
 
 struct matrix_object : interface_scene_object
 {
@@ -22,8 +23,20 @@ struct matrix_object : interface_scene_object
 
   void Draw() override;
 
+  auto Pos() -> vec&;
+  auto Size() -> vec&;
+  auto Rot() -> float&;
+
+  auto Pos() const -> vec;
+  auto Size() const -> vec;
+  auto Rot() const -> float;
+
+  bool root = true;
 protected:
   CIwFMat2D matrix_local, matrix_rendered;
+private:
+  vec pos = vec(0, 0), size = vec(0, 0);
+  float rot = 0;
 };
 
 /*
