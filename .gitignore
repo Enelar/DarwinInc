@@ -72,3 +72,4 @@ $RECYCLE.BIN/
 DarwinInc/build_darwininc_vc12x/*
 DarwinInc/data-ram/*
 DarwinInc/data/development.icf
+DarwinInc/project_DarwinInc/*
