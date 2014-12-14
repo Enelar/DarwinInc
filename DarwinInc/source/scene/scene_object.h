@@ -13,6 +13,19 @@ struct interface_scene_object
   {}
 };
 
+#include "IwGeom.h"
+
+struct matrix_object : interface_scene_object
+{
+  void Update(float dtime) override;
+  void Update(float dtime, CIwFMat2D parent);
+
+  void Draw() override;
+
+protected:
+  CIwFMat2D matrix_local, matrix_rendered;
+};
+
 /*
  * Completely NULL safe. You could call it like nullptr->Draw(), and nothing bad happens!
  * Reference could not be copyed!
@@ -33,7 +46,7 @@ struct scene_object_reference : interface_scene_object
 /*
  * Used on every stack object, as scene primitive, help avoiding cleared memory access
  */
-struct scene_object_shared_pluggable : interface_scene_object
+struct scene_object_shared_pluggable : matrix_object
 {
   shared<scene_object_reference> *detached_storage = new shared<scene_object_reference>();;
   scene_object_shared_pluggable();
@@ -45,26 +58,11 @@ struct scene_object_shared_pluggable : interface_scene_object
   void Draw() override;
 };
 
-#endif
-
-#include "tree_of_objects.h"
-
-#ifdef _TREE_OBJECTS_DEFINED_
-#ifndef _SCENE_OBJECT_DEFINED_
-#define _SCENE_OBJECT_DEFINED_
-struct scene_object : tree_of_objects
+struct memleak_scene_object : interface_scene_object
 {
-  ~scene_object() override;
-  interface_scene_object &get_pluggable();
-private:
-  scene_object_shared_pluggable *pluggable = nullptr;
-};
+  interface_scene_object &obj;
 
-struct memleak_scene_object : scene_object
-{
-  scene_object &obj;
-
-  memleak_scene_object(scene_object &_obj)
+  memleak_scene_object(interface_scene_object &_obj)
     : obj(_obj)
   {
 
@@ -80,6 +78,21 @@ struct memleak_scene_object : scene_object
   {
     obj.Draw();
   }
+};
+
+#endif
+
+#include "tree_of_objects.h"
+
+#ifdef _TREE_OBJECTS_DEFINED_
+#ifndef _SCENE_OBJECT_DEFINED_
+#define _SCENE_OBJECT_DEFINED_
+struct scene_object : tree_of_objects
+{
+  ~scene_object() override;
+  scene_object_shared_pluggable &get_pluggable();
+private:
+  scene_object_shared_pluggable *pluggable = nullptr;
 };
 #endif
 #endif

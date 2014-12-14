@@ -66,7 +66,7 @@ scene_object::~scene_object()
     pluggable->HostRemove();
 }
 
-interface_scene_object &scene_object::get_pluggable()
+scene_object_shared_pluggable &scene_object::get_pluggable()
 {
   if (!pluggable)
     pluggable = new scene_object_shared_pluggable();

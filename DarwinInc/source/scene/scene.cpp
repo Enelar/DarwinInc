@@ -12,6 +12,12 @@ void scene::Draw()
 
 scene &scene::operator+=(interface_scene_object *obj)
 {
+  fictive_elements.push_back(obj);
+  return *this;
+}
+
+scene &scene::operator+=(matrix_object *obj)
+{
   tree += obj;
   return *this;
 }

@@ -2,19 +2,20 @@
 
 void tree_of_objects::Update(float dtime)
 {
-  for (auto &obj : objects)
-    obj->Update(dtime);
+  matrix_object::Update(dtime);
+  for (auto obj : childs)
+    obj->Update(dtime, matrix_rendered);
 }
 
 void tree_of_objects::Draw()
 {
-  for (auto &obj : objects)
+  for (auto &obj : childs)
     obj->Draw();
 }
 
-tree_of_objects &tree_of_objects::operator+=(interface_scene_object *obj)
+tree_of_objects &tree_of_objects::operator+=(matrix_object *obj)
 {
-  objects.push_back(obj);
+  childs.push_back(obj);
   return *this;
 }
 
@@ -25,6 +26,21 @@ tree_of_objects &tree_of_objects::operator+=(scene_object &obj)
 
 tree_of_objects::~tree_of_objects()
 {
-  for (auto &obj : objects)
+  for (auto &obj : childs)
     delete obj;
+}
+
+void matrix_object::Update(float dtime)
+{
+  Update(dtime, CIwFMat2D::g_Identity);
+}
+
+void matrix_object::Update(float dtime, CIwFMat2D parent)
+{
+  matrix_rendered = matrix_local * parent;
+}
+
+void matrix_object::Draw()
+{
+
 }
