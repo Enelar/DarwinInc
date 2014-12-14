@@ -10,8 +10,8 @@ struct texture
   texture(string file);
   ~texture();
 
-  operator CIw2DImage*();
+  operator CIw2DImage*() const;
 private:
   string filename;
-  CIw2DImage* img = nullptr;
+  mutable CIw2DImage* img = nullptr;
 };

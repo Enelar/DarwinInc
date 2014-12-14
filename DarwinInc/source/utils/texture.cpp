@@ -6,11 +6,11 @@ texture::texture(string file)
 
 }
 
-texture::operator CIw2DImage*()
+texture::operator CIw2DImage*() const
 {
   if (img)
     return img;
-  img = Iw2DCreateImage(filename.c_str());
+  return img = Iw2DCreateImage(filename.c_str());
 }
 
 texture::~texture()

@@ -1,7 +1,6 @@
 #include "s3e.h"
 #include "IwDebug.h"
-#include "Iw2D.h"
-#include "source\utils\texture.h"
+#include "utils\sprite.h"
 
 void app()
 {

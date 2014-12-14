@@ -1,17 +1,32 @@
 #!/usr/bin/env mkb
 files
 {
+    [source]
+    (source)
     DarwinInc.cpp
-    [utils]
+    def.h
+    def.cpp
+    [source/utils]
     (source/utils)
     texture.h
     texture.cpp
+    vec.h
+    sprite.h
+    sprite.cpp
+    [source/scene]
+    (source/scene)
+    scene.h
+    scene.cpp
+    world.h
+    world.cpp
 }
 
 subprojects
 {
     iwutil
     iw2d
+    iw2dscenegraph
+    iw2dscenegraphcore
 }
 
 deployment
