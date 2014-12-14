@@ -11,88 +11,42 @@ struct interface_scene_object
   {}
 };
 
+/*
+ * Completely NULL safe. You could call it like nullptr->Draw(), and nothing bad happens!
+ * Reference could not be copyed!
+ */
 struct scene_object_reference : interface_scene_object
 {
   bool removed = false;
   interface_scene_object &obj;
 
-  scene_object_reference(interface_scene_object &_obj)
-    : obj(_obj)
-  {
+  scene_object_reference(interface_scene_object &_obj);
 
-  }
+  void Update(float dtime) override;
+  void Draw() const override;
 
-  void Update(float dtime) override
-  {
-    if (this == nullptr)
-      return;
-    if (removed)
-      return;
-    obj.Update(dtime);
-  }
-
-  void Draw() const override
-  {
-    if (this == nullptr)
-      return;
-    if (removed)
-      return;
-    obj.Draw();
-  }
-
-  void Remove()
-  {
-    if (this == nullptr)
-      return;
-    removed = true;
-  }
+  void Remove();
 };
 
+/*
+ * Used on every stack object, as scene primitive, help avoiding cleared memory access
+ */
 struct scene_object_shared_pluggable : interface_scene_object
 {
   shared<scene_object_reference> *detached_storage = new shared<scene_object_reference>();;
-  scene_object_shared_pluggable()
-  {}
-  void HostRemove()
-  {
-    detached_storage->data->Remove();
-    detached_storage->Remove();
-  }
-  void ClientRemove()
-  {
-    detached_storage->Remove();
-  }
-  ~scene_object_shared_pluggable()
-  {
-    ClientRemove();
-  }
-  void Update(float dtime) override
-  {
-    detached_storage->data->Update(dtime);
-  }
-
-  void Draw() const override
-  {
-    detached_storage->data->Draw();
-  }
+  scene_object_shared_pluggable();
+  void HostRemove();
+  void ClientRemove();
+  
+  ~scene_object_shared_pluggable() override;
+  void Update(float dtime) override;
+  void Draw() const override;
 };
 
-struct scene_object : interface_scene_object // interface resolution
+struct scene_object : interface_scene_object // only interface resolution
 {
-  ~scene_object() override
-  {
-    pluggable->HostRemove();
-  }
-
-  interface_scene_object &get_pluggable()
-  {
-    if (!pluggable->detached_storage->data)
-    {
-      pluggable->detached_storage->data = new scene_object_reference(*this);
-      pluggable->detached_storage->Add();
-    }
-    return *pluggable;
-  }
+  ~scene_object() override;
+  interface_scene_object &get_pluggable();
 private:
   scene_object_shared_pluggable *pluggable = new scene_object_shared_pluggable();
 };
