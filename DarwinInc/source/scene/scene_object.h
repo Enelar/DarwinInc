@@ -11,13 +11,12 @@ struct scene_object
   {}
 };
 
-template<typename T>
 struct shared_scene_obj_plug : scene_object
 {
   bool removed = false;
-  T &obj;
+  scene_object &obj;
 
-  shared_scene_obj_plug(T &_obj)
+  shared_scene_obj_plug(scene_object &_obj)
     : obj(_obj)
   {
 
@@ -45,12 +44,11 @@ struct shared_scene_obj_plug : scene_object
   }
 };
 
-template<typename T>
-struct shared_scene_obj
+struct shared_scene_obj : scene_object // interface resolution
 {
-  shared<shared_scene_obj_plug<T>> *removed;
+  shared<shared_scene_obj_plug> *removed;
   shared_scene_obj()
-    : sh(new shared())
+    : removed(new shared<shared_scene_obj_plug>())
   {
 
   }
@@ -61,16 +59,37 @@ struct shared_scene_obj
     removed->Remove();
   }
 
-  T &object() const
+  scene_object &object()
   {
-    assert(!removed);
-    return *reinterpret_cast<T *>(this + 1);
+    return *reinterpret_cast<scene_object *>(this + 1);
   }
 
   operator scene_object &()
   {
     if (!removed->data)
-      removed->data = new shared_scene_obj_plug<T>(object());
+      removed->data = new shared_scene_obj_plug(object());
     return *removed->data;
+  }
+};
+
+struct memleak_scene_object : scene_object
+{
+  scene_object &obj;
+
+  memleak_scene_object(scene_object &_obj)
+    : obj(_obj)
+  {
+
+  }
+
+
+  void Update(float dtime) override
+  {
+    obj.Update(dtime);
+  }
+
+  void Draw() const override
+  {
+    obj.Draw();
   }
 };

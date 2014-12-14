@@ -17,6 +17,8 @@ public:
   void Update(float dtime) override;
   void Draw() const override;
 
-  //scene &operator+=(scene_object);
-  //scene &operator+=(scene_object);
+  scene &operator+=(scene_object);
+  scene &operator+=(shared_scene_obj);
+
+  ~scene() override;
 };
