@@ -20,10 +20,17 @@ void matrix_object::Update(catchball &dtime, CIwFMat2D parent)
 }
 
 #include "Iw2D.h"
+#include "IwColour.h"
 
 void matrix_object::Draw()
 {
   interface_scene_object::Draw();
+  vec4 t = color;
+  t.w *= alpha;
+  t *= 0xFF;
+  CIwColour c;
+  c.Set(t.x, t.y, t.z, t.w);
+  Iw2DSetColour(c);
   Iw2DSetTransformMatrix(matrix_rendered);
 }
 
@@ -40,6 +47,16 @@ auto matrix_object::Rot() -> float&
   return rot;
 }
 
+auto matrix_object::Alpha() -> float&
+{
+  return alpha;
+}
+
+auto matrix_object::Color() -> vec4&
+{
+  return color;
+}
+
 auto matrix_object::Pos() const -> vec
 {
   return pos;
@@ -51,4 +68,13 @@ auto matrix_object::Size() const -> vec
 auto matrix_object::Rot()  const -> float
 {
   return rot;
+}
+auto matrix_object::Alpha() const -> float
+{
+  return alpha;
+}
+
+auto matrix_object::Color() const -> vec4
+{
+  return color;
 }

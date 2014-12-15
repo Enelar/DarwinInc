@@ -27,16 +27,21 @@ struct matrix_object : interface_scene_object
   auto Pos() -> vec&;
   auto Size() -> vec&;
   auto Rot() -> float&;
+  auto Alpha() -> float&;
+  auto Color()->vec4&;
 
   auto Pos() const -> vec;
   auto Size() const -> vec;
   auto Rot() const -> float;
+  auto Alpha() const -> float;
+  auto Color() const->vec4;
 
 protected:
   CIwFMat2D matrix_local, matrix_rendered;
 private:
   vec pos = vec(0, 0), size = vec(1, 1);
-  float rot = 0;
+  float rot = 0, alpha = 1;
+  vec4 color = vec4(1, 1, 1, 1);
 };
 
 /*
