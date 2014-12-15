@@ -19,7 +19,7 @@ struct sprite : scene_object
 
 private:
   texture img;
-  vec wished_size;
+  vec wished_size = vec(0, 0);
 
   void Update(float dtime) override;
   void Draw() override;

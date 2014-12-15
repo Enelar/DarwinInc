@@ -34,7 +34,7 @@ struct matrix_object : interface_scene_object
 protected:
   CIwFMat2D matrix_local, matrix_rendered;
 private:
-  vec pos = vec(0, 0), size = vec(0, 0);
+  vec pos = vec(0, 0), size = vec(1, 1);
   float rot = 0;
 };
 
