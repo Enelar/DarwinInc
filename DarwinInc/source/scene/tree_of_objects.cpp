@@ -4,13 +4,18 @@ void tree_of_objects::Update(float dtime)
 {
   matrix_object::Update(dtime);
   if (root)
-    matrix_object::Update(dtime, CIwFMat2D::g_Identity);
+    Update(dtime, CIwFMat2D::g_Identity);
+}
 
-  for (matrix_object *obj : childs)
-  {
-    obj->Update(dtime);
+void tree_of_objects::Update(float dtime, CIwFMat2D parent)
+{
+  // Entry point here
+  if (!root)
+    Update(dtime); // do user overloaded code
+  matrix_object::Update(dtime, parent); // recalculate matrix
+
+  for (auto &obj : childs)
     obj->Update(dtime, matrix_rendered);
-  }
 }
 
 void tree_of_objects::Draw()

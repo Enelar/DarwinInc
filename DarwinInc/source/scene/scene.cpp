@@ -2,11 +2,15 @@
 
 void scene::Update(float dtime)
 {
+  for (auto &obj : fictive_elements)
+    obj->Update(dtime);
   tree.Update(dtime);
 }
 
 void scene::Draw()
 {
+  for (auto &obj : fictive_elements)
+    obj->Draw();
   tree.Draw();
 }
 
