@@ -27,12 +27,12 @@ void app()
     // wished time - actual time
     // if actual less, then we making to many fps, and could wait
     // Otherwise we should render!
-    if (yield < 0)
+    //debug: if (yield < 0)
       yield = 0;
     s3eDeviceYield(yield);
 
-    
-    oldtime = s3eTimerGetMs();
+    oldtime = newtime;
+    newtime = s3eTimerGetMs();
   }
 }
 

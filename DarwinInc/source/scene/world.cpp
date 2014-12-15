@@ -8,11 +8,21 @@ world::world()
 void world::Init()
 {
   *this += map = "img/world1.png";
-  //map.Size().x = Iw2DGetSurfaceWidth();
-  //map.Size().y = Iw2DGetSurfaceHeight();
+  map.Size().x = Size().x;
+  map.Size().y = Size().y;
 
-  //auto &spot = *this += "img/world1.png";
+  spotsize.x = Size().x / mask.Size().x;
+  spotsize.y = Size().y / mask.Size().y;
+  spotsize = vec(4, 4);
+
+  auto &spot = *this += "img/RedWhite.jpg";
  // spot.Pos() = vec(0, 0);
-  //spot.Size() = vec(100, 100);
+  spot.Size() = spotsize;
 //  AddChild(t);
+
+}
+
+void world::Update(float dtime)
+{
+  scene::Update(dtime);
 }

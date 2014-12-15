@@ -39,6 +39,17 @@ sprite &scene::operator+=(string file)
   return *t;
 }
 
+vecI scene::Size()
+{
+  if (screensize == vecI(0, 0))
+  {
+    screensize.x = Iw2DGetSurfaceWidth();
+    screensize.y = Iw2DGetSurfaceHeight();
+  }
+
+  return screensize;
+}
+
 scene::~scene()
 {
 }
