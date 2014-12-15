@@ -21,6 +21,7 @@ void app()
     test.Update();
     test.Draw();
 
+    Iw2DFinishDrawing();
     Iw2DSurfaceShow();
 
     int yield = 1000 / FPS - (newtime - oldtime);

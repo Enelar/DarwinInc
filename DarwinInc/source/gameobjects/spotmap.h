@@ -21,6 +21,10 @@ struct spotmap : scene_object
   void Update(catchball &) override;
   void Draw() override;
 
+  std::vector<spotsel *> Neibors(vecI);
+  vecI ShortCut(vecI) const;
+  spotsel *Access(vecI);
+
   spotmap(map &);
   std::vector<spotsel> array;
 private:

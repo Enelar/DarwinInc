@@ -27,3 +27,6 @@ AllowNoDepthBufferClear = 1
 [UTIL]
 #MemoryBreakpoint=141
 MemMgrMaxAllocWarning = 0
+
+[GX]
+DataCacheSize=102400
