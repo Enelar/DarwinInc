@@ -15,6 +15,7 @@ files
     sprite.cpp
     bitmap.h
     bitmap.cpp
+    extern_sprite.h
     [source/scene]
     (source/scene)
     scene.h

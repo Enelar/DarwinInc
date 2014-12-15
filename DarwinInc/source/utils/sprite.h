@@ -11,6 +11,7 @@ struct sprite : scene_object
   sprite(string);
   sprite(texture);
   sprite();
+  ~sprite();
 
   sprite &operator=(string);
   sprite &operator=(texture);
@@ -19,7 +20,8 @@ struct sprite : scene_object
 
   void Update(catchball &dtime) override;
   void Draw() override;
+protected:
+  texture *img = nullptr;
 private:
-  texture img;
   vec wished_size = vec(0, 0);
 };

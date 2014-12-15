@@ -19,9 +19,11 @@
 [S3E]
 MemSize = 30000000
 DispFixRot = FixedLandscape
+MemMgrMaxAllocWarning = 0
 
 [GL]
 AllowNoDepthBufferClear = 1
 
 [UTIL]
 #MemoryBreakpoint=141
+MemMgrMaxAllocWarning = 0

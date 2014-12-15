@@ -11,14 +11,8 @@ void world::Init()
   map.Size().x = Size().x;
   map.Size().y = Size().y;
 
-  spotsize.x = Size().x / mask.Size().x;
-  spotsize.y = Size().y / mask.Size().y;
-  spotsize = vec(4, 4);
 
-  auto &spot = *this += "img/RedWhite.jpg";
- // spot.Pos() = vec(0, 0);
-  spot.Size() = spotsize;
-//  AddChild(t);
+  *this += spots;
 
 }
 
