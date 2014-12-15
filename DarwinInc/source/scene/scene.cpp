@@ -16,7 +16,7 @@ scene &scene::operator+=(interface_scene_object *obj)
   return *this;
 }
 
-scene &scene::operator+=(matrix_object *obj)
+scene &scene::operator+=(tree_of_objects *obj)
 {
   tree += obj;
   return *this;
@@ -24,8 +24,15 @@ scene &scene::operator+=(matrix_object *obj)
 
 scene &scene::operator+=(scene_object &obj)
 {
-  tree += obj;
+  fictive_elements.push_back(&obj.get_pluggable());
   return *this;
+}
+
+sprite &scene::operator+=(string file)
+{
+  auto *t = new sprite(file);
+  *this += t;
+  return *t;
 }
 
 scene::~scene()

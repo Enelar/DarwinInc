@@ -2,11 +2,14 @@
 
 void tree_of_objects::Update(float dtime)
 {
+  if (root)
+    matrix_object::Update(dtime, CIwFMat2D::g_Identity);
   matrix_object::Update(dtime);
-  for (auto obj : childs)
+
+  for (matrix_object *obj : childs)
   {
-    obj->Update(dtime);
     obj->Update(dtime, matrix_rendered);
+    obj->Update(dtime);
   }
 }
 
@@ -17,16 +20,11 @@ void tree_of_objects::Draw()
   matrix_object::Draw();
 }
 
-tree_of_objects &tree_of_objects::operator+=(matrix_object *obj)
+tree_of_objects &tree_of_objects::operator+=(tree_of_objects *obj)
 {
   childs.push_back(obj);
   obj->root = false;
   return *this;
-}
-
-tree_of_objects &tree_of_objects::operator+=(scene_object &obj)
-{
-  return *this += &obj.get_pluggable();
 }
 
 tree_of_objects::~tree_of_objects()

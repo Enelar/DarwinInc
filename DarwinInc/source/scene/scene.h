@@ -6,9 +6,11 @@
 
 #include "c++\stl\_list.h"
 #include "scene_object.h"
+#include "../utils/sprite.h"
 
 
 using std::list;
+struct sprite;
 struct scene : interface_scene_object
 {
   tree_of_objects tree;
@@ -19,8 +21,9 @@ public:
   void Draw() override;
 
   scene &operator+=(interface_scene_object *);
-  scene &operator+=(matrix_object *);
+  scene &operator+=(tree_of_objects *);
   scene &operator+=(scene_object &);
+  sprite &operator+=(string);
 
   ~scene() override;
 };

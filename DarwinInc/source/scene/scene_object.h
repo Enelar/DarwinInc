@@ -31,7 +31,6 @@ struct matrix_object : interface_scene_object
   auto Size() const -> vec;
   auto Rot() const -> float;
 
-  bool root = true;
 protected:
   CIwFMat2D matrix_local, matrix_rendered;
 private:

@@ -7,14 +7,14 @@
 struct scene_object;
 struct tree_of_objects : matrix_object
 {
-  std::list<matrix_object *> childs;
+  std::list<tree_of_objects *> childs;
 
   void Update(float dtime) override;
   void Draw() override;
   ~tree_of_objects() override;
 
-  tree_of_objects &operator+=(matrix_object *);
-  tree_of_objects &operator+=(scene_object &);
+  tree_of_objects &operator+=(tree_of_objects *);
+  bool root = true;
 };
 
 #define _TREE_OBJECTS_DEFINED_

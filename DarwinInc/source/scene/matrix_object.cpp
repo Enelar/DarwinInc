@@ -2,8 +2,6 @@
 
 void matrix_object::Update(float dtime)
 {
-  if (root)
-    Update(dtime, CIwFMat2D::g_Identity);
   interface_scene_object::Update(dtime);
 }
 
