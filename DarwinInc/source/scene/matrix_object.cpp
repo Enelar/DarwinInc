@@ -25,10 +25,22 @@ void matrix_object::Update(catchball &dtime, CIwFMat2D parent)
 void matrix_object::Draw()
 {
   interface_scene_object::Draw();
+
   vec4 t = color;
-  t.w *= alpha;
+  for (auto i = 0; i < 4; i++)
+    if (t[i] < 0)
+      t[i] = 0;
+    else if (t[i] > 1)
+      t[i] = 1;
+
+  if (alpha < 0)
+    t.w = 0;
+  else if (alpha <= 1)
+    t.w *= alpha;
+
   t *= 0xFF;
   CIwColour c;
+
   c.Set(t.x, t.y, t.z, t.w);
   Iw2DSetColour(c);
   Iw2DSetTransformMatrix(matrix_rendered);
