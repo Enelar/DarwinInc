@@ -13,6 +13,8 @@ files
     vec.h
     sprite.h
     sprite.cpp
+    bitmap.h
+    bitmap.cpp
     [source/scene]
     (source/scene)
     scene.h

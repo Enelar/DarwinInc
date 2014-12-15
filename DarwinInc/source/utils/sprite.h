@@ -13,6 +13,7 @@ struct sprite : scene_object
   sprite();
 
   sprite &operator=(string);
+  sprite &operator=(texture);
   auto Size() -> vec&;
   auto Size() const -> vec;
 

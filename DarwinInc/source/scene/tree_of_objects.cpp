@@ -2,14 +2,14 @@
 
 void tree_of_objects::Update(float dtime)
 {
+  matrix_object::Update(dtime);
   if (root)
     matrix_object::Update(dtime, CIwFMat2D::g_Identity);
-  matrix_object::Update(dtime);
 
   for (matrix_object *obj : childs)
   {
-    obj->Update(dtime, matrix_rendered);
     obj->Update(dtime);
+    obj->Update(dtime, matrix_rendered);
   }
 }
 

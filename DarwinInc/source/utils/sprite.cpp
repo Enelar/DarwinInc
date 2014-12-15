@@ -15,9 +15,19 @@ sprite::sprite()
 {
 }
 
+#include "c++\utility"
+
 sprite &sprite::operator=(string file)
 {
-  img = file;
+  img.~texture();
+  new (&img) texture(file);
+  return *this;
+}
+
+sprite &sprite::operator=(texture tex)
+{
+  img.~texture();
+  new (&img) texture(tex);
   return *this;
 }
 
