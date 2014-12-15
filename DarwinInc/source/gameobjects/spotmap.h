@@ -3,6 +3,13 @@
 #include "../utils/extern_sprite.h"
 #include "map.h"
 
+struct spotsel
+{
+  bool skip = true;
+  extern_sprite *sprite = nullptr;
+};
+
+#include "c++\vector"
 struct spotmap : scene_object
 {
   texture tex = "img/RedWhite.jpg";
@@ -13,7 +20,7 @@ struct spotmap : scene_object
   void Draw() override;
 
   spotmap(map &);
-
+  std::vector<spotsel> array;
 private:
   map &mask;
   void Init(catchball &b);

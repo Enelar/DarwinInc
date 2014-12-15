@@ -3,10 +3,26 @@
 #include "../utils/texture.h"
 struct map
 {
+  union texel
+  {
+    __declspec(align(1)) struct
+    {
+      char r, g, b, a;
+    } pixel;
+    uint32 mem;
+
+    operator bool() const
+    {
+      return pixel.a > 0x20;
+    }
+  };
+  static_assert(sizeof(texel) == 4, "Aligment failed");
+
+
   map(string file);
   ~map();
 
-  uint8 &operator[](vecI);
+  texel &operator[](vecI);
   vecI Size();
 
 private:
