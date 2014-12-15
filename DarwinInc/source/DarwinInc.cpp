@@ -18,7 +18,7 @@ void app()
     s3ePointerUpdate();
 
     Iw2DSurfaceClear(0xff000000);
-    test.Update((float)20 / 1000);
+    test.Update();
     test.Draw();
 
     Iw2DSurfaceShow();

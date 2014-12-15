@@ -6,7 +6,7 @@ scene_object_reference::scene_object_reference(interface_scene_object &_obj)
 
 }
 
-void scene_object_reference::Update(float dtime)
+void scene_object_reference::Update(catchball &dtime)
 {
   if (this == nullptr)
     return;
@@ -51,7 +51,7 @@ scene_object_shared_pluggable::~scene_object_shared_pluggable()
 {
   ClientRemove();
 }
-void scene_object_shared_pluggable::Update(float dtime)
+void scene_object_shared_pluggable::Update(catchball &dtime)
 {
   detached_storage->data->Update(dtime);
 }

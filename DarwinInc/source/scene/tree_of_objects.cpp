@@ -1,13 +1,13 @@
 #include "tree_of_objects.h"
 
-void tree_of_objects::Update(float dtime)
+void tree_of_objects::Update(catchball &dtime)
 {
   matrix_object::Update(dtime);
   if (root)
     Update(dtime, CIwFMat2D::g_Identity);
 }
 
-void tree_of_objects::Update(float dtime, CIwFMat2D parent)
+void tree_of_objects::Update(catchball &dtime, CIwFMat2D parent)
 {
   // Entry point here
   if (!root)

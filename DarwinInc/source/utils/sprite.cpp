@@ -31,7 +31,7 @@ sprite &sprite::operator=(texture tex)
   return *this;
 }
 
-void sprite::Update(float dtime)
+void sprite::Update(catchball &dtime)
 {
   if (Size() == vec(0, 0))
     Size() = img.Size();

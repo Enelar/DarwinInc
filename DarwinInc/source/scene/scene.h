@@ -15,10 +15,11 @@ struct scene : interface_scene_object
 {
   tree_of_objects tree;
   list<interface_scene_object *> fictive_elements;
-  vecI screensize = { 0, 0 };
+  catchball cb;
 
+  void Update(catchball &dtime) override;
 public:
-  void Update(float dtime) override;
+  virtual void Update();
   void Draw() override;
 
   vecI Size();

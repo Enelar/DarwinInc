@@ -3,9 +3,10 @@
 
 #include "../def.h"
 
+struct catchball;
 struct interface_scene_object
 {
-  virtual void Update(float dtime)
+  virtual void Update(catchball &dtime)
   {}
   virtual void Draw()
   {}
@@ -18,8 +19,8 @@ struct interface_scene_object
 
 struct matrix_object : interface_scene_object
 {
-  void Update(float dtime) override;
-  void Update(float dtime, CIwFMat2D parent);
+  void Update(catchball &dtime) override;
+  void Update(catchball &dtime, CIwFMat2D parent);
 
   void Draw() override;
 
@@ -49,7 +50,7 @@ struct scene_object_reference : interface_scene_object
 
   scene_object_reference(interface_scene_object &_obj);
 
-  void Update(float dtime) override;
+  void Update(catchball &dtime) override;
   void Draw() override;
 
   void Remove();
@@ -66,7 +67,7 @@ struct scene_object_shared_pluggable : matrix_object
   void ClientRemove();
   
   ~scene_object_shared_pluggable() override;
-  void Update(float dtime) override;
+  void Update(catchball &dtime) override;
   void Draw() override;
 };
 
@@ -81,7 +82,7 @@ struct memleak_scene_object : interface_scene_object
   }
 
 
-  void Update(float dtime) override
+  void Update(catchball &dtime) override
   {
     obj.Update(dtime);
   }
@@ -108,3 +109,5 @@ private:
 };
 #endif
 #endif
+
+#include "../scene/catchball.h"

@@ -22,7 +22,7 @@ void world::Init()
 
 }
 
-void world::Update(float dtime)
-{
-  scene::Update(dtime);
-}
+//void world::Update(catchball &dtime)
+//{
+//  scene::Update(dtime);
+//}

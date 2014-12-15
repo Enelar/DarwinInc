@@ -19,6 +19,8 @@ files
     (source/scene)
     scene.h
     scene.cpp
+    catchball.h
+    catchball.cpp
     scene_object.h
     scene_object.cpp
     tree_of_objects.h
@@ -32,6 +34,8 @@ files
     (source/gameobjects)
     sceneswitch.h
     sceneswitch.cpp
+    spotmap.h
+    spotmap.cpp
     [source/game/calc]
     (source/gameobjects)
     map.h

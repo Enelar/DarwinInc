@@ -1,10 +1,16 @@
 #include "scene.h"
 
-void scene::Update(float dtime)
+void scene::Update(catchball &dtime)
 {
   for (auto &obj : fictive_elements)
     obj->Update(dtime);
   tree.Update(dtime);
+}
+
+void scene::Update()
+{
+  cb.Next();
+  Update(cb);
 }
 
 void scene::Draw()
@@ -41,13 +47,7 @@ sprite &scene::operator+=(string file)
 
 vecI scene::Size()
 {
-  if (screensize == vecI(0, 0))
-  {
-    screensize.x = Iw2DGetSurfaceWidth();
-    screensize.y = Iw2DGetSurfaceHeight();
-  }
-
-  return screensize;
+  return cb.Size();
 }
 
 scene::~scene()

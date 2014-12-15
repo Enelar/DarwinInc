@@ -17,10 +17,9 @@ struct sprite : scene_object
   auto Size() -> vec&;
   auto Size() const -> vec;
 
+  void Update(catchball &dtime) override;
+  void Draw() override;
 private:
   texture img;
   vec wished_size = vec(0, 0);
-
-  void Update(float dtime) override;
-  void Draw() override;
 };

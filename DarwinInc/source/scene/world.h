@@ -14,5 +14,5 @@ struct world : public scene
 
   world();
 
-  void Update(float dtime) override;
+  //void Update(catchball &dtime) override;
 };

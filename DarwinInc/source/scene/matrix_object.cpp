@@ -1,11 +1,11 @@
 #include "scene_object.h"
 
-void matrix_object::Update(float dtime)
+void matrix_object::Update(catchball &dtime)
 {
   interface_scene_object::Update(dtime);
 }
 
-void matrix_object::Update(float dtime, CIwFMat2D parent)
+void matrix_object::Update(catchball &dtime, CIwFMat2D parent)
 {
   deconstruct_vec(Pos(), matrix_local.t., x, y);
 
