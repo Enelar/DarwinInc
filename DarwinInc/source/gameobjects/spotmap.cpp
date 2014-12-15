@@ -6,22 +6,22 @@ spotmap::spotmap(map &m)
 
 }
 
-void spotmap::Init(catchball &b)
+void spotmap::Init(catchball &scene)
 {
   // Forcing texture load
   tex.Size();
 
-  auto size = mask.Size();
-  spotsize.x = b.Size().x / size.x;
-  spotsize.y = b.Size().y / size.y;
+  auto world_size = mask.Size();
+  spotsize.x = (float)scene.Size().x / world_size.x;
+  spotsize.y = (float)scene.Size().y / world_size.y;
 
-  for (auto y = 0; y < size.y; y++)
-    for (auto x = 0; x < size.x; x++)
+  for (auto y = 0; y < world_size.y; y++)
+    for (auto x = 0; x < world_size.x; x++)
     {
       auto p = new extern_sprite(tex);
-      *this += p;
       p->Pos() = vec(x * spotsize.x, y * spotsize.y);
       p->Size() = spotsize;
+      *this += p;
     }
   inited = true;
 }
