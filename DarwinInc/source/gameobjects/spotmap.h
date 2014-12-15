@@ -12,7 +12,7 @@ struct spotsel
 #include "c++\vector"
 struct spotmap : scene_object
 {
-  texture tex = "img/RedWhite.jpg";
+  texture tex = "img/spot.png";
   extern_sprite spot = tex;
   vec spotsize;
   bool inited = false;

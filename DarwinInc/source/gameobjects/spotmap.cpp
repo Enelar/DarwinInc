@@ -30,6 +30,8 @@ void spotmap::Init(catchball &scene)
       auto p = new extern_sprite(tex);
       p->Pos() = vec(x * spotsize.x, y * spotsize.y);
       p->Size() = spotsize;
+      p->Color() = vec4(0, 1, 0, 1);
+      p->Alpha() = 0;
       *this += spotsel.sprite = p;
     }
   inited = true;
